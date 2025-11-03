@@ -10,7 +10,7 @@ const Headphones = () => {
 
   const products = useQuery(api.products.getProductsByCategory, { category: 'headphones' })
   
-  if (!products) return <div className='p-6 '> Loading...</div>
+  if (!products) return <div className='py-6 px-39 h-full'> Loading...</div>
 
     return (
         <>

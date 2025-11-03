@@ -10,6 +10,7 @@
   --sec-ash: #fafafa;
   --background: #ffffff;
   --foreground: #000000;
+  --another-ash: #f2f2f2;
   --manrope: 'Manrope';
 }
 
@@ -86,24 +87,27 @@ nav{
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
-  gap: 20px;
+  gap: 15px;
   grid-template-areas: 
   "img1 img3"
   "img2 img3"
   ;
-  height: 100%;
-  padding: 20px 0;
+  height: auto;
+  padding: 30px 0;
 }
 
 .img1{
   grid-area: img1;
   height: 100%;
   width: 100%;
+  object-fit: contain;
+  
 }
 .img2{
   grid-area: img2;
   height: 100%;
   width: 100%;
+  object-fit: contain;
 }
 .img3{
   grid-area: img3;

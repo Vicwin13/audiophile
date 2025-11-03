@@ -23,7 +23,7 @@ export default defineSchema({
     image1: v.optional(v.string()),
     image2:v.optional(v.string()),
     image3:v.optional(v.string()),
-    
+  
   }).index("by_slug", ['slug'])
     .index('by_active', ['isActive'])
   .index("by_category", ["category"]),

@@ -48,7 +48,8 @@ export const create = mutation({
     isFeatured: v.optional(v.boolean()),
     image1: v.optional(v.string()),
     image2: v.optional(v.string()),
-    image3: v.optional(v.string())
+    image3: v.optional(v.string()),
+   
   },
   handler: async (ctx, args) => {
     const existing = await ctx.db
@@ -85,6 +86,7 @@ export const seedProducts = mutation({
       category: v.union(v.literal('headphones'), v.literal('speakers'), v.literal('earphones')),
       features: v.string(),
       isFeatured: v.optional(v.boolean()),
+   
     }))
   },
   handler: async (ctx, args) => {
@@ -112,6 +114,7 @@ export const seedOnce = mutation({
       category: v.union(v.literal("headphones"), v.literal("speakers"), v.literal("earphones")),
       features: v.string(),
       isFeatured: v.optional(v.boolean()),
+ 
     }))
   },
   handler: async (ctx, { products }) => {

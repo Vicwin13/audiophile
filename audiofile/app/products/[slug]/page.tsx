@@ -1,15 +1,27 @@
 // app/product/[slug]/page.tsx
 "use client";
 
+import { Toaster, toast } from 'sonner';
 import { notFound, useParams } from "next/navigation";
 
 import Feature from "@/app/components/Feature";
+import GoBack from '@/app/components/Goback';
 import Image from "next/image";
 import ProductDetailsCard from "@/app/components/ProductDetailsCard";
 import { api } from "@/convex/_generated/api";
+import { useCart } from "@/app/context/CartContext";
 import { useQuery } from "convex/react";
+import { useState } from "react";
 
 export default function ProductPage() {
+
+  const [quantity, setQuantity] = useState(1);
+  
+
+  const {addToCart} = useCart()
+
+
+
   const { slug } = useParams<{ slug: string }>();
   const product = useQuery(api.products.getProductBySlug, { slug });
 
@@ -19,14 +31,48 @@ export default function ProductPage() {
   )
 
 
+    const increment = () => {
+    setQuantity(prev => prev + 1);
+  };
+
+  const decrement = () => {
+    setQuantity(prev => Math.max(1, prev - 1));
+  };
+
+  const handleAddToCart = () => {
+    if (!product) return;
+
+    for (let i = 0; i < quantity; i++) {
+      addToCart({
+        id: product._id, 
+        title: product.title,
+        price: `$${product.price}`,
+        imageSrc: product.image ?? "",
+        imageAlt: product.title,
+      });
+    }
+
+    toast.success(`${product.title} added to cart`), {
+      duration: 3000,
+      position: 'top-left',
+    }
+    
+    setQuantity(1);
+  };
+
     if (product === undefined) {
 
-        return <div className="p-6">Loading…</div>;
+        return <div className="py-6 px-39 h-full">Loading…</div>;
     }
-    if(!product) return <div>Product not found </div>
+    if(!product) return notFound()
     
   return (  
     <section className="px-39">
+
+      <GoBack  className=' pt-[78px] pb-10' fallbackPath='/'/>
+
+
+
       <div className="py-9">
         <ProductDetailsCard
           imageSrc={product?.image ?? ""}
@@ -43,16 +89,19 @@ export default function ProductPage() {
           amountText={`$${product?.price}`}
           buttonText="ADD TO CART"
           subtitle={product?.description ?? ""}
+          quantity={quantity}
+          onIncrement={increment}
+          onDecrement={decrement}
           BtnProps={{
             className: "cursor-pointer",
             variant: "primary",
             size: "sm",
-            href: "", // wire to your cart flow
+            onClick: handleAddToCart,
           }}
         />
       </div>
 
-      <Feature />
+      <Feature features = {features ?? null} />
 
        <div className="grid-container">
 
@@ -61,7 +110,10 @@ export default function ProductPage() {
               <Image className="img3 " src={`${product?.image3}`} alt={"Image"} width={445} height={200}/>
 
 
-          </div>
+      </div>
+      <div>
+        <Toaster/>
+      </div>
     
 
     </section>

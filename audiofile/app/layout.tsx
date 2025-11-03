@@ -1,9 +1,12 @@
 import "./globals.css";
 
+import CartModal from "./components/CartModal";
+import { CartProvider } from "./context/CartContext";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import Footer from "./components/Footer";
 import type { Metadata } from "next";
 import Navbar from "./components/Navbar";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,9 +22,13 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ConvexClientProvider>
-          <Navbar/>
-          {children}
-          <Footer/>
+          <CartProvider>
+            <Navbar/>
+            {children}
+            <CartModal />
+             <Toaster richColors position="top-right" />
+            <Footer/>
+          </CartProvider>
         </ConvexClientProvider>
       </body>
     </html>

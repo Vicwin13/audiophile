@@ -10,6 +10,7 @@
 
 import type * as productFeatures from "../productFeatures.js";
 import type * as products from "../products.js";
+import type * as setting from "../setting.js";
 
 import type {
   ApiFromModules,
@@ -28,6 +29,7 @@ import type {
 declare const fullApi: ApiFromModules<{
   productFeatures: typeof productFeatures;
   products: typeof products;
+  setting: typeof setting;
 }>;
 declare const fullApiWithMounts: typeof fullApi;
 

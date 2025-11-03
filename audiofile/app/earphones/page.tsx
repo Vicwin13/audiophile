@@ -3,8 +3,15 @@
 import { DisplayCard } from "../components/DisplayCard"
 import Image from "next/image"
 import { ItemCards } from "../components/ItemCards"
+import { api } from "@/convex/_generated/api"
+import { useQuery } from "convex/react"
 
 const Earphones = () => {
+
+  const products = useQuery(api.products.getProductsByCategory, { category: "earphones" })
+  if (!products) return <div className='py-6 px-39 h-full'> Loading...</div>
+
+
   return (
       <>
           <div className='w-full bg-[#131313] h-[200px] flex items-center justify-center'>
@@ -13,27 +20,34 @@ const Earphones = () => {
           <section className="px-39">
               <div className='py-9'>
               
-              <DisplayCard
-                imageSrc="https://res.cloudinary.com/dvjx9x8l9/image/upload/v1762034273/HNG/image-removebg-preview_42_1_bbtjek.png"
-                imageAlt="Hero"
-                text1="NEW PRODUCT"
-                title="ZX9 SPEAKER"
-                width={290}
-                className='flex-row-reverse md:gap-32'
+          {
+              products?.map((product, index) => (
+                <DisplayCard
+                  key={product._id}
+                  imageSrc={product.image ?? ""}
+                  imageAlt={product.title}
+                  text1={product.isFeatured ? "NEW PRODUCT" : ""}
+                  title={product.title}
+                  width={290}
+                  className={index % 2 === 0 ? 'flex-row-reverse md:gap-32' : 'md:gap-32'}
                 text1ClassName='text-(--main-orange)'
                 secondClassName='w-[540px]'
                 subtitleClassName='text-black/60 w-[410px]'
                 imgContClassName='bg-(--main-ash) rounded-lg w-[540px] h-[560px] flex justify-center items-center'
-                      height={380}
-                      titleClassName="w-min"
+                height={380}
                 buttonText="SEE PRODUCT"
-                subtitle="Upgrade your sound system with the all new ZX9 active speaker. It’s a bookshelf speaker system that offers truly wireless connectivity -- creating new possibilities for more pleasing and practical audio setups."
+                subtitle={product.description ?? ''}
                 BtnProps=
                 {{
+                    className:'cursor-pointer',
                     variant: 'primary',
-                    size: "sm"
+                    size: "sm",
+                    href: `/products/${product.slug}`
                 }}
             />
+              ))
+            }
+
               </div>
               
                    <section className=" h-auto pt-28 pb-18">

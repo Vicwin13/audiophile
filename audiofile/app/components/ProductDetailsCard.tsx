@@ -27,6 +27,10 @@ interface ProductCardProps extends React.ComponentPropsWithoutRef<'div'>{
     shadowClassName?: string;
     //buttons
 
+    quantity?: number,
+    onIncrement?: ()=> void,
+    onDecrement?: ()=> void,
+
     BtnProps?: Omit<ButtonProps, 'children'>;
     buttonClassName?: string;
 
@@ -51,21 +55,12 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({
     imgContClassName,
     shadowClassName,
     amountText = '$2,999',
+    quantity = 1,
+    onIncrement,
+    onDecrement,
     
     ...rest
 }) => {
-
-    const [quantity, setQuantity] = useState(1)
-
-    const increment = () => {
-        setQuantity(prev => prev + 1 )
-    }
-
-    const decrement = () => {
-        setQuantity (prev => Math.max(1, prev -1 ))
-    }
-
-
 
   return (
     <>
@@ -81,13 +76,13 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({
                   
                   <div className="flex items-center gap-4 ">
                       <div className="flex items-center h-9.5 w-30 justify-center gap-5 bg-(--main-ash) p">
-                          <button className="text-black/25 text-[13px] tracking-[1px]" onClick={decrement}
+                          <button className="text-black/25 text-[13px] tracking-[1px]" onClick={onDecrement}
                           aria-label="Decrease quantity"
                           >-</button>
 
                             <span className=" text-[13px] font-bold tracking-[1px]"> {quantity}</span>
                           
-                          <button className="text-black/25 text-[13px] tracking-[1px]" onClick={increment}
+                          <button className="text-black/25 text-[13px] tracking-[1px]" onClick={onIncrement}
                           aria-label="Increase quantity">+</button>
                           
                         </div>

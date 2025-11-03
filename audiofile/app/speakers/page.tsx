@@ -3,8 +3,17 @@
 import { DisplayCard } from "../components/DisplayCard"
 import Image from "next/image"
 import { ItemCards } from "../components/ItemCards"
+import { api } from "@/convex/_generated/api"
+import { useQuery } from "convex/react"
 
 const Speakers = () => {
+
+  const products = useQuery(api.products.getProductsByCategory, { category: "speakers" })
+  
+  if(!products) return <div className='py-6 px-39 h-full'> Loading...</div>
+  
+
+
   return (
       <>
          <div className='w-full bg-[#131313] h-[200px] flex items-center justify-center'>
@@ -12,14 +21,17 @@ const Speakers = () => {
         </div>
           <section className="px-39">
               <div className='py-9'>
+          {
+            products.map((product, index) => (
               
               <DisplayCard
-                imageSrc="https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761990797/HNG/image-removebg-preview_38_1_rs4axe.png"
-                imageAlt="Hero"
-                text1="NEW PRODUCT"
-                title="ZX9 SPEAKER"
+                key={product._id}
+              imageSrc={product.image ?? ""}
+              imageAlt={product.title}
+              text1={product.isFeatured ? "NEW PRODUCT" : ""}
+              title={product.title}
                 width={290}
-                className='flex-row-reverse md:gap-32'
+                className={index % 2 === 0 ? 'flex-row-reverse md:gap-32' : 'md:gap-32'}
                 text1ClassName='text-(--main-orange)'
                 secondClassName='w-[540px]'
                 subtitleClassName='text-black/60 w-[410px]'
@@ -27,37 +39,19 @@ const Speakers = () => {
                       height={350}
                       titleClassName="w-min"
                 buttonText="SEE PRODUCT"
-                subtitle="Upgrade your sound system with the all new ZX9 active speaker. It’s a bookshelf speaker system that offers truly wireless connectivity -- creating new possibilities for more pleasing and practical audio setups."
+                subtitle={product.description ?? ''}
                 BtnProps=
                 {{
-                    variant: 'primary',
-                    size: "sm"
+                  variant: 'primary',
+                  size: "sm",
+                  className: "cursor-pointer",
+                  href: `products/${product.slug}`
                 }}
-            />
+                />
+              ))
+              }
           </div>
-               <div className='py-9'>
-              
-              <DisplayCard
-                imageSrc="https://res.cloudinary.com/dvjx9x8l9/image/upload/v1762033565/HNG/image-removebg-preview_49_jxmaw8.png"
-                imageAlt="Hero"
-                title="ZX7 SPEAKER"
-                width={268}
-                className='md:gap-32'
-                text1ClassName='text-(--main-orange)'
-                secondClassName='w-[540px]'
-                subtitleClassName='text-black/60 w-[410px]'
-                imgContClassName='bg-(--main-ash) rounded-lg w-[540px] h-[560px] flex justify-center items-center'
-                      height={380}
-                      titleClassName="w-min"
-                buttonText="SEE PRODUCT"
-                subtitle="Stream high quality sound wirelessly with minimal loss. The ZX7 bookshelf speaker uses high-end audiophile components that represents the top of the line powered speakers for home or studio use."
-                BtnProps=
-                {{
-                    variant: 'primary',
-                    size: "sm"
-                }}
-            />
-              </div>
+             
         <section className=" h-auto pt-28 pb-18">
 
         <div className="flex justify-between gap-7.5 items-center  h-full">

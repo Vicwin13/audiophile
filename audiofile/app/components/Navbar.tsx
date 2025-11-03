@@ -1,7 +1,13 @@
+'use client'
+
 import Image from "next/image"
 import Link from "next/link"
+import { useCart } from "../context/CartContext"
 
 const Navbar = () => {
+
+  const {totalItems, setIsCartOpen} = useCart()
+
   return (
     <nav className=" bg-[#131313] px-39 ">
       <div className="border-b-[#979797] border border-r-0 border-l-0 border-t-0 pb-9 pt-8 flex justify-between items-center">
@@ -26,12 +32,29 @@ const Navbar = () => {
           </Link>
           </ul>
       
-          <div>
-              <Link href={"#"}>
-              <Image src={"https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910244/HNG/Combined_Shape_ducvhd.svg"} alt={"cart"} width={23.33} height={20} />
-              </Link>
-          </div>
+        <div className="relative">
+          <button 
+            onClick={() => setIsCartOpen(true)}
+            className="relative p-2 hover:bg-gray-800 rounded-full transition-colors"
+            aria-label={`Open cart with ${totalItems} items`}
+          >
+            <Image 
+              src={"https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910244/HNG/Combined_Shape_ducvhd.svg"} 
+              alt={"cart"} 
+              width={23.33} 
+              height={20} 
+            />
+            
+            
+            {totalItems > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                {totalItems > 99 ? '99+' : totalItems}
+              </span>
+            )}
+          </button>
+        </div>
       </div>
+      
     </nav>
   )
 }
