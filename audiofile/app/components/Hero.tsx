@@ -63,10 +63,10 @@ const Hero = () => {
 
       </section>
       <section className="max-sm:px-2.5 px-10 md:px-39 pb-30  max-md:pb-16 max-sm:pb-10">
-        <div className="third flex flex-col justify-end">
+        <div className="third flex flex-col justify-center items-center">
           
           <DisplayCard
-            className="flex-row-reverse gap-10 max-md:gap-2 max-md:flex-col-reverse max-md:items-start md:gap-[130px] pb-8 justify-center max-md:justify-start "
+            className="flex-row-reverse h-auto gap-10 md:items-start max-md:gap-2 max-md:flex-col-reverse max-md:items-start md:gap-25 pb-8 justify-center max-md:justify-start "
             imageAlt="Speaker Image"
             imageSrc="https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761990797/HNG/image-removebg-preview_38_1_rs4axe.png"
             width={410}
@@ -115,7 +115,7 @@ const Hero = () => {
       </section>
 
       <section className="px-10 max-sm:px-2.5 md:px-39 pb-9">
-        <div className="flex justify-between max-md:flex-col-reverse items-center">
+        <div className="flex justify-between documentary items-center">
           <div >
             <h1 className="font-bold bring tracking-[1.43px] max-sm:tracking-normal text-[40px] max-sm:text-2xl max-sm:leading-7  leading-11 uppercase">Bringing you the <span className="text-(--main-orange)">best</span> audio gear</h1>
             <p className="md:w-[445px] max-sm:w-full max-sm:px-2  max-md:px-8 max-md:text-center pt-8 font-medium text-[15px] leading-[25px] max-sm:leading-[18px] text-black/50">

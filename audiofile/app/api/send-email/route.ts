@@ -1,9 +1,18 @@
 // app/api/send-email/route.ts
 
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer'
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        type: 'OAuth2',
+        user: process.env.EMAIL_USER,
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+    },
+});
 
 interface CartItem {
     title: string;
@@ -21,10 +30,24 @@ interface OrderRequestBody {
 
 export async function POST(request: Request): Promise<NextResponse> {
     try {
+
+        console.log('Email API called')
         const { email, name, cartItems, total, orderId }: OrderRequestBody = await request.json();
 
-        const { data, error }: { data: unknown; error: unknown } = await resend.emails.send({
-            from: 'Audiophile <onboarding@resend.dev>',
+
+         console.log('📧 Attempting to send email to:', email);
+        console.log('🔑 Environment check - EMAIL_USER exists:', !!process.env.EMAIL_USER);
+        console.log('🔑 Environment check - CLIENT_ID exists:', !!process.env.GOOGLE_CLIENT_ID);
+
+
+
+
+        console.log('verifying connection')
+        await transporter.verify()
+        console.log('Email connection verified')
+
+        const result = await transporter.sendMail({
+            from: `Audiophile <${process.env.EMAIL_USER}>`,
             to: [email],
             subject: `Order Confirmation - #${orderId}`,
             html: `
@@ -39,15 +62,21 @@ export async function POST(request: Request): Promise<NextResponse> {
                 <h3>Total Amount: $${total}</h3>
                 <p>We'll send you a shipping confirmation when your order ships.</p>
             `,
+        })
+
+        console.log('sending email')
+
+
+        return NextResponse.json({
+            success: true,
+            messageId: result.messageId,
+            message: "Email sent successfully"
         });
-
-        if (error) {
-            return NextResponse.json({ error }, { status: 400 });
-        }
-
-        return NextResponse.json(data);
     } catch (error) {
         console.error('Error sending email:', error)
-        return NextResponse.json({ error }, { status: 500 });
+        return NextResponse.json({
+            error: 'Failed to send email',
+            details : error instanceof Error ? error.message : 'unknown error'
+         }, { status: 500 });
     }
 }

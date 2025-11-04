@@ -4,6 +4,7 @@
 import CheckoutForm, {CheckoutForHandle} from "@/app/components/CheckoutForm";
 import { useRef, useState } from "react";
 
+import CheckoutSuccessModal from "@/app/components/SuccessModal"; // Add this import
 import OrderSummary from "@/app/components/OrderSummary";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
@@ -15,7 +16,8 @@ export default function CheckoutPage() {
   const formRef = useRef<CheckoutForHandle>(null);
   const { cartItems, clearCart } = useCart();
   const [isProcessing, setIsProcessing] = useState(false);
-  
+  const [showSuccessModal, setShowSuccessModal] = useState(false); // Add modal state
+  const [orderDetails, setOrderDetails] = useState<any>(null); // Store order details for modal
   
   const settings = useQuery(api.setting.getSettings);
   const vatRate = settings?.vatRate || 20; 
@@ -26,7 +28,6 @@ export default function CheckoutPage() {
     setIsProcessing(true);
     
     try {
-
       toast.loading('Processing your Order', {id: 'checkout'})
 
       // Process checkout logic here
@@ -38,15 +39,22 @@ export default function CheckoutPage() {
         vat: calculateVAT()
       });
       
+      // Store order details for the modal
+      setOrderDetails({
+        orderId: result.orderId,
+        cartItems: cartItems,
+        total: calculateTotal(),
+        shipping: shippingFee,
+        vat: calculateVAT()
+      });
 
       toast.success("Order placed successfully! Check your mail for confirmation")
+      
       // Clear cart after successful checkout
       clearCart();
       
-      // You can also redirect to a success page or show a success message
-      console.log('Order successful:', result.orderId);
-
-      setTimeout(()=> router.push('/'), 2000)
+      // Show success modal instead of redirecting
+      setShowSuccessModal(true);
       
     } catch (error) {
       toast.error('Checkout failed, Please try again')
@@ -56,14 +64,16 @@ export default function CheckoutPage() {
     }
   };
 
-   const triggerFormSubmit = () => {
+  const handleCloseModal = () => {
+    setShowSuccessModal(false);
+    router.push('/'); // Redirect to home when modal is closed
+  };
+
+  const triggerFormSubmit = () => {
     if (formRef.current) {
       formRef.current.submitForm();
     }
   };
-
-
-
 
   const calculateSubtotal = () => {
     return cartItems.reduce(
@@ -83,7 +93,7 @@ export default function CheckoutPage() {
     return subtotal + vat + shippingFee;
   };
 
-  if (cartItems.length === 0) {
+  if (cartItems.length === 0 && !showSuccessModal) {
     return (
       <section className="px-39 py-16">
         <div className="text-center">
@@ -95,46 +105,55 @@ export default function CheckoutPage() {
   }
 
   return (
+    <>
       <section className="px-39 py-16 bg-(--another-ash)">
-    
-          <div>
-              
+        <div className="flex justify-between gap-18">    
+          <div className="bg-white w-full rounded-lg p-12 ">
+            <h1 className="text-2xl font-bold mb-8">CHECKOUT</h1>
+            <div className="w-full">
+              <CheckoutForm 
+                onSubmit={handleCheckout}
+                isProcessing={isProcessing}
+              />
+            </div>
           </div>
-      
-    <div className="  flex justify-between gap-18">    
-      <div className="bg-white w-full rounded-lg p-12 ">
-        {/* Checkout Form */}
-      <h1 className="text-2xl font-bold mb-8">CHECKOUT</h1>
-        <div className="w-full">
-          <CheckoutForm 
-            onSubmit={handleCheckout}
-            isProcessing={isProcessing}
-          />
-        </div>
-      </div>
-        
-        {/* Order Summary */}
-        <div className="lg:sticky lg:top-8 min-w-[350px]  h-fit">
-          <OrderSummary
-            cartItems={cartItems}
-            subtotal={calculateSubtotal()}
-            vat={calculateVAT()}
-            shipping={shippingFee}
-            total={calculateTotal()}
-            isProcessing={isProcessing}
-            onCheckout={triggerFormSubmit}
+          
+          {/* Order Summary */}
+          <div className="lg:sticky lg:top-8 min-w-[350px] h-fit">
+            <OrderSummary
+              cartItems={cartItems}
+              subtotal={calculateSubtotal()}
+              vat={calculateVAT()}
+              shipping={shippingFee}
+              total={calculateTotal()}
+              
             />
+          </div>
         </div>
-    </div>
-    </section>
+      </section>
+
+      {/* Success Modal */}
+      {orderDetails && (
+        <CheckoutSuccessModal
+          isOpen={showSuccessModal}
+          onClose={handleCloseModal}
+          orderId={orderDetails.orderId}
+          cartItems={orderDetails.cartItems}
+          total={orderDetails.total}
+          shipping={orderDetails.shipping}
+          vat={orderDetails.vat}
+        />
+      )}
+    </>
   );
 }
-
 
 async function processCheckout(orderData: any) {
   const orderId = `ORD-${Date.now()}`; 
 
   try {
+    console.log('📤 Starting email send process...');
+
     // 1. Send the confirmation email
     const emailResponse = await fetch('/api/send-email', {
       method: 'POST',
@@ -152,14 +171,21 @@ async function processCheckout(orderData: any) {
       }),
     });
 
+    console.log('📨 Email API response status:', emailResponse.status);
+    
+    const emailResult = await emailResponse.json();
+    console.log('📨 Email API response data:', emailResult);
+
     if (!emailResponse.ok) {
-      throw new Error('Failed to send confirmation email');
+      console.error('❌ Email API failed:', emailResult);
+      throw new Error(emailResult.error || 'Failed to send confirmation email');
     }
 
+    console.log('✅ Email sent successfully!');
     return { success: true, orderId };
 
   } catch (error) {
-    console.error('Checkout processing failed:', error);
+    console.error('❌ Checkout processing failed:', error);
     throw error;
   }
 }

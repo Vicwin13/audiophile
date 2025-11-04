@@ -42,7 +42,7 @@ const router = useRouter()
           {/* Header */}
           <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 ">
             <div className="flex items-center justify-between">
-                          <h3 className="text-lg font-bold">CART {`(${totalItems})`}</h3>
+              <h3 className="text-lg font-bold">CART {`(${totalItems})`}</h3>
               <button
                 onClick={() => setIsCartOpen(false)}
                 className="text-gray-400 hover:text-gray-600"

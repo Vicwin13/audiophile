@@ -54,12 +54,12 @@ export const DisplayCard: React.FC<DisplayCardProps> = ({
 }) => {
   return (
       <>
-          <div className={` flex items-center max-md:justify-center box-border  max-md:text-center max-md:mx-auto  ${className}`} {...rest}>
+          <div className={` flex items-center max-md:justify-center box-border   max-md:text-center max-md:mx-auto  ${className}`} {...rest}>
           <div className={secondClassName}>
                   {
                       text1 && <p className={`text-sm uppercase pb-6 max-md:pb-2.5  tracking-[10px] ${text1ClassName}`}> { text1}</p>
                   }
-                  {title && <h1 className={`text-[56px] leading-[58px] max-md:leading-12 pb-6 max-md:pb-1.5 tracking-[2px]  uppercase font-bold ${titleClassName}`}>{title}</h1>}
+                  {title && <h1 className={`lg:text-[56px] text-4xl md:text-[40px] lg:leading-[58px]  md:leading-10 pb-6 md:pb-4 tracking-[2px]  uppercase font-bold ${titleClassName}`}>{title}</h1>}
                   {subtitle && <p className={`text-[15px] pb-10 max-md:pb-2 leading-[25px] max-md:leading- font-medium  ${subtitleClassName}`}>{subtitle}</p>}
                   
                   <Button className={` tracking-[1px] font-bold  ${buttonClassName}`}
@@ -70,7 +70,7 @@ export const DisplayCard: React.FC<DisplayCardProps> = ({
                   
               </div>
               <div className={`${imgContClassName} relative`}>
-                  <div className={`absolute bottom-25 max-md:block left-1/2 transform -translate-x-1/2 w-2/4 h-3 bg-black blur-lg rounded-full opacity-70 ${shadowClassName}`}></div>
+                  <div className={`absolute lg:bottom-25 md:bottom-0 max-md:block left-1/2 transform -translate-x-1/2 w-2/4 h-3 bg-black blur-lg rounded-full opacity-70 ${shadowClassName}`}></div>
                   {
                       imageSrc && (
                           <Image src={imageSrc} alt={imageAlt} width={width} height={height} sizes="" className={ imageStyling } />

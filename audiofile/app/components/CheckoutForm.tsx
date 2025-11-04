@@ -81,15 +81,27 @@ const CheckoutForm = forwardRef<CheckoutForHandle, CheckoutFormProps>(({ onSubmi
         }
     };
 
-      const submitFormProgrammatically = () => {
-        if (validateForm()) {
-            onSubmit(formData);
-        }
-    };
+    //   const submitFormProgrammatically = () => {
+    //     if (validateForm()) {
+    //         onSubmit(formData);
+    //     }
+    // };
 
  useImperativeHandle(ref, () => ({
         submitForm: submitFormProgrammatically
-    }));
+ }));
+    
+    const submitFormProgrammatically = () => {
+  console.log('🎯 [CheckoutForm] submitFormProgrammatically called');
+  console.log('📝 [CheckoutForm] Current formData:', formData);
+  
+  if (validateForm()) {
+    console.log('✅ [CheckoutForm] Form is valid, calling onSubmit');
+    onSubmit(formData);
+  } else {
+    console.log('❌ [CheckoutForm] Form validation failed');
+  }
+};
 
     // ADD THE RETURN STATEMENT HERE - this was missing!
     return (
@@ -98,7 +110,7 @@ const CheckoutForm = forwardRef<CheckoutForHandle, CheckoutFormProps>(({ onSubmi
             <div className="bg-white  rounded-lg">
                 <h2 className="text-[13px] leading-[25px] tracking-[0.93px] font-bold mb-6 text-(--main-orange)">BILLING DETAILS</h2>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label className="block tracking-[-0.12px] text-xs font-bold mb-2">Name</label>
                     <input

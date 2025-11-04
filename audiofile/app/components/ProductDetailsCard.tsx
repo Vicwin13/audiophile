@@ -16,7 +16,7 @@ interface ProductCardProps extends React.ComponentPropsWithoutRef<'div'>{
     height?: number;
     buttonText?: string;
     amountText?: string;
-
+    imageStyling?: string;
     //other classnames
 
     secondClassName?: string;
@@ -58,7 +58,7 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({
     quantity = 1,
     onIncrement,
     onDecrement,
-    
+    imageStyling,
     ...rest
 }) => {
 
@@ -69,7 +69,7 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({
                   {
                       text1 && <p className={`text-sm uppercase pb-6  tracking-[10px] ${text1ClassName}`}> { text1}</p>
                   }
-                  {title && <h1 className={`text-[56px] leading-[58px] pb-6 tracking-[2px]  uppercase font-bold ${titleClassName}`}>{title}</h1>}
+                  {title && <h1 className={`lg:text-[56px] max-sm:text-2xl text-4xl md:text-[40px] lg:leading-[58px]  md:leading-10 pb-6 md:pb-4 tracking-[2px]  uppercase font-bold ${titleClassName}`}>{title}</h1>}
                   {subtitle && <p className={`text-[15px] pb-10 leading-[25px] font-medium  ${subtitleClassName}`}>{subtitle}</p>}
 
                   <p className="font-bold text-lg tracking-[1.29px] pb-8">{ amountText }</p>
@@ -98,7 +98,7 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({
                   <div className={`absolute bottom-25 left-1/2 transform -translate-x-1/2 w-2/4 h-3 bg-black blur-lg rounded-full opacity-70 ${shadowClassName}`}></div>
                   {
                       imageSrc && (
-                          <Image src={imageSrc} alt={imageAlt} width={width} height={height}/>
+                          <Image src={imageSrc} alt={imageAlt} width={width} height={height} className={ imageStyling} />
                       )
                   }
               </div>

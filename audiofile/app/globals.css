@@ -127,16 +127,26 @@ nav{
   outline: none;
 }
 
-
-
-@media screen and (width <= 768px){
-  .nav-links{
+@media screen and (width <= 870px) {
+   .nav-links{
     display: none;
+    
+  }
+  .nav-links li{
+    text-transform: uppercase;
   }
 
   .hamburger{
     display: block;
   }
+
+
+  
+}
+
+
+@media screen and (width <= 768px){
+ 
   .bring{
     
     text-align: center;
@@ -147,13 +157,32 @@ nav{
     background-size: 30rem;
   }
 
+  .documentary{
+    flex-direction: column-reverse;
+  }
+
 
 }
 
 @media screen and (width <= 640px){
   .foot-links{
     flex-direction: column;
+
   }
+
+  .grid-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 15px;
+  grid-template-areas: 
+  "img1 img1"
+  "img2 img2"
+  "img3 img3"
+  ;
+  height: auto;
+  padding: 30px 0;
+}
 }
 
 

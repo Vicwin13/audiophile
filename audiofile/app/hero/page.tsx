@@ -9,7 +9,7 @@ const Hero = () => {
   return (
     <section className="">
 
-      <section className="bg-black h-screen px-39 whole">
+      <section className="bg-black h-screen min-[870px]:px-39 sm:px-10 px-2 whole">
           
           <section className="w-[398px] pt-32">
               
@@ -27,14 +27,15 @@ const Hero = () => {
             subtitle="Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast."
             BtnProps={{
               variant: 'primary',
-              size: "sm"
+              size: "sm",
+              href: "/headphones"
             }}
           />
           
               
           </section>
       </section>
-      <section className="px-39 h-auto pt-30 pb-42">
+      <section className="min-[870px]:px-39 sm:px-10 px-2 h-auto pt-30 pb-42">
 
         <div className="flex justify-between gap-7.5 items-center border-red-400 h-full">
 
@@ -43,26 +44,29 @@ const Hero = () => {
           imageAlt="item1"
           width={108}
           height={160}
-          title="HEADPHONES"
+            title="HEADPHONES"
+            href="/headphones"
         />
                 <ItemCards
           imageSrc="https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910243/HNG/image-removebg-preview_38_dzeo24.png"
           imageAlt="item2"
           width={121.49}
           height={146}
-          title="SPEAKERS"
+            title="SPEAKERS"
+            href="/speakers"
         />
                 <ItemCards
           imageSrc="https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910243/HNG/Group_5_mfq5tm.png"
           imageAlt="item3"
           width={140 }
           height={161}
-          title="EARPHONES"
+            title="EARPHONES"
+            href="/earphones"
         />
           </div>
 
       </section>
-      <section className="px-39 pb-30 ">
+      <section className="min-[870px]:px-39 sm:px-10 px-2 pb-30 ">
         <div className="third flex flex-col justify-end">
           
           <DisplayCard
@@ -77,19 +81,20 @@ const Hero = () => {
             buttonText="SEE PRODUCT"
             BtnProps={{
               variant: 'filled',
-              size:"sm"
+              size: "sm",
+              href: "/speakers"
               
             }}
           />
           
         </div>
       </section>
-      <section className="px-39 pb-30      ">
+      <section className="min-[870px]:px-39 sm:px-10 px-2 pb-30      ">
 
       <section className="sect4  ">
           <div className="h-full text-center flex flex-col pl-24 justify-center items-start  w-fit ">
             <h1 className="text-[28px] font-bold tracking-[2px] mb-8">ZX7 SPEAKER</h1>
-            <Button variant="secondary" size="sm">
+            <Button variant="secondary" size="sm" href="/speakers">
               SEE PRODUCT
             </Button>
             </div>
@@ -97,21 +102,21 @@ const Hero = () => {
       </section>
 
 
-      <section className="flex px-39 pb-30 items-center justify-center gap-7.5">
+      <section className="flex min-[870px]:px-39 sm:px-10 px-2 pb-30 items-center justify-center gap-7.5">
         <div className="h-80 w-[540px] sect5-img ">
          
         </div>
         <div className="bg-[#f1f1f1] rounded-lg h-80 w-[540px]">
           <div className="h-full text-center flex flex-col pl-24 justify-center items-start  w-fit ">
             <h1 className="text-[28px] font-bold tracking-[2px] mb-8">YX1 EARPHONES</h1>
-            <Button variant="secondary" size="sm">
+            <Button variant="secondary" size="sm" href="/earphones">
               SEE PRODUCT
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="px-39 pb-9">
+      <section className="  md:min-[870px]:px-39 sm:px-10 px-2 pb-9">
         <div className="flex justify-between items-center">
           <div >
             <h1 className="font-bold tracking-[1.43px] text-[40px] leading-11 uppercase">Bringing you the <span className="text-(--main-orange)">best</span> audio gear</h1>

@@ -67,7 +67,7 @@ export default function ProductPage() {
     if(!product) return notFound()
     
   return (  
-    <section className="px-39">
+    <section className="min-[870px]:px-39 sm:px-10 px-2">
 
       <GoBack  className=' pt-[78px] pb-10' fallbackPath='/'/>
 
@@ -80,11 +80,11 @@ export default function ProductPage() {
           title={product?.title}
           width={352}
           text1={product?.isFeatured ? 'NEW PRODUCT': '' }
-          className="flex-row-reverse md:gap-32"
+          className="max-[870px]:flex-col-reverse items-center flex-row-reverse gap-10 min-[870px]:gap-32"
           text1ClassName="text-(--main-orange)"
-          secondClassName="w-[540px]"
-          subtitleClassName="text-black/60 w-[410px]"
-          imgContClassName="bg-(--main-ash) rounded-lg w-[540px] h-[560px] flex justify-center items-center"
+          secondClassName="min-[870px]:w-[540px] w-full"
+          subtitleClassName="text-black/60 min-[870px]:w-[410px] w-full"
+          imgContClassName="bg-(--main-ash) rounded-lg min-sm:w-[540px] min-sm:h-[560px] w-full flex justify-center items-center"
           height={380}
           amountText={`$${product?.price}`}
           buttonText="ADD TO CART"
@@ -92,6 +92,7 @@ export default function ProductPage() {
           quantity={quantity}
           onIncrement={increment}
           onDecrement={decrement}
+          imageStyling='min-w-[150px] w-[320px]'
           BtnProps={{
             className: "cursor-pointer",
             variant: "primary",

@@ -9,6 +9,7 @@ interface ItemCardProps extends React.ComponentPropsWithoutRef<'div'>{
     height?: number;
     title?: string;
   imageStyling?: string;
+  href?: string
 
 }
 
@@ -18,6 +19,7 @@ export const ItemCards: React.FC<ItemCardProps> = ({
     width ,
     height ,
   title,
+  href,
     imageStyling,
 }) => {
   return (
@@ -42,7 +44,8 @@ export const ItemCards: React.FC<ItemCardProps> = ({
         iconPosition='right'
         iconAlt='arrow'
         iconHeight={10 }
-        iconWidth={5}
+          iconWidth={5}
+          href={href}
         
         >
         SHOP

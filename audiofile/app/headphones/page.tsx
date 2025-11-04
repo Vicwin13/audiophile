@@ -18,7 +18,7 @@ const Headphones = () => {
                 <h1 className='text-center text-white uppercase font-bold text-[40px] tracking-[1.43] leading-11'>Headphones</h1>
             </div>
      
-      <section className='px-39'>
+      <section className=' min-[870px]:px-39 sm:px-10 px-2'>
           <div className='py-9'>
 
             {
@@ -30,12 +30,13 @@ const Headphones = () => {
                   text1={product.isFeatured ? "NEW PRODUCT" : ""}
                   title={product.title}
                   width={349}
-                  className={index % 2 === 0 ? 'flex-row-reverse md:gap-32' : 'md:gap-32'}
+                  className={index % 2 === 0 ? 'min-[785px]:flex-row-reverse flex-col-reverse  gap-5 pb-12 md:gap-20' : ' pb-12 min-[785px]:flex-row flex-col-reverse gap-5 md:gap-20 '}
                 text1ClassName='text-(--main-orange)'
-                secondClassName='w-[540px]'
-                subtitleClassName='text-black/60 w-[410px]'
-                imgContClassName='bg-(--main-ash) rounded-lg w-[540px] h-[560px] flex justify-center items-center'
-                height={386}
+                secondClassName='lg:w-[540px]  max-md:text-center w-[70%] max-sm:w-full'
+                subtitleClassName='text-black/60 md:w-[410px]'
+                imgContClassName='bg-(--main-ash) rounded-lg lg:w-[540px] lg:h-[560px] w-fit p-10 flex justify-center items-center'
+                  height={386}
+                  imageStyling='min-w-[150px] w-[250px]'
                 buttonText="SEE PRODUCT"
                 subtitle={product.description ?? ''}
                 BtnProps=
@@ -52,40 +53,43 @@ const Headphones = () => {
            
           </div>
           
-        <section className=" h-auto pt-28 pb-18">
+        <section className=" h-auto max-sm:pt-10 pt-28 pb-18">
 
-        <div className="flex justify-between gap-7.5 items-center border-red-400 h-full">
+        <div className="flex justify-between max-sm:flex-col gap-7.5 items-center border-red-400 h-full">
 
         <ItemCards
           imageSrc="https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910243/HNG/image-removebg-preview_41_omdbp1.png"
           imageAlt="item1"
           width={108}
           height={160}
-          title="HEADPHONES"
+                title="HEADPHONES"
+                href='/headphones'
         />
                 <ItemCards
           imageSrc="https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910243/HNG/image-removebg-preview_38_dzeo24.png"
           imageAlt="item2"
           width={121.49}
           height={146}
-          title="SPEAKERS"
+                title="SPEAKERS"
+                href='/speakers'
         />
                 <ItemCards
           imageSrc="https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910243/HNG/Group_5_mfq5tm.png"
           imageAlt="item3"
           width={140 }
           height={161}
-          title="EARPHONES"
+                title="EARPHONES"
+                href='/earphones'
         />
                 </div>
                 
       </section>
 
       <section className=" pt-10 mt-10 pb-12">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between max-md:flex-col-reverse items-center">
           <div >
-            <h1 className="font-bold tracking-[1.43px] text-[40px] leading-11 uppercase">Bringing you the <span className="text-(--main-orange)">best</span> audio gear</h1>
-            <p className="md:w-[445px] pt-8 font-medium text-[15px] leading-[25px] text-black/50">
+            <h1 className="font-bold tracking-[1.43px] max-md:text-center text-[40px] leading-11 uppercase">Bringing you the <span className="text-(--main-orange)">best</span> audio gear</h1>
+            <p className="md:w-[445px] pt-8 font-medium max-md:text-center text-[15px] leading-[25px] text-black/50">
               Located at the heart of New York City, Audiophile is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Audiophile the best place to buy your portable audio equipment.
             </p>
           </div>
