@@ -10,6 +10,8 @@ interface OrderSummaryProps {
   vat: number;
   shipping: number;
   total: number;
+  isProcessing: boolean;
+  onCheckout: () => void;
 }
 
 const OrderSummary: React.FC<OrderSummaryProps> = ({
@@ -17,7 +19,9 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   subtotal,
   vat,
   shipping,
-  total
+  total,
+  isProcessing,
+  onCheckout
 }) => {
   return (
     <div className="bg-white p-6 rounded-lg">
@@ -74,6 +78,18 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
         <span className="text-black/50">GRAND TOTAL</span>
         <span className="font-bold text-(--main-orange)">${total.toFixed(2)}</span>
       </div>
+
+
+
+       {/* Submit Button */}
+            <button
+        type="submit"
+        form='checkout-form'
+                disabled={isProcessing}
+                className="w-full bg-(--main-orange) text-white py-4 px-6 rounded-lg font-semibold hover:bg-(--sec-orange) transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+                {isProcessing ? 'PROCESSING...' : 'CONTINUE & PAY'}
+            </button>
     </div>
   );
 };

@@ -8,6 +8,7 @@ interface ItemCardProps extends React.ComponentPropsWithoutRef<'div'>{
     width?: number;
     height?: number;
     title?: string;
+  imageStyling?: string;
 
 }
 
@@ -16,11 +17,12 @@ export const ItemCards: React.FC<ItemCardProps> = ({
     imageSrc,
     width ,
     height ,
-    title
+  title,
+    imageStyling,
 }) => {
   return (
 
-    <section className='w-[350px] relative '>
+    <section className='w-[350px] max-sm:w-3xs relative '>
 
 
       <div className='flex flex-col   justify-end items-center '>
@@ -28,8 +30,8 @@ export const ItemCards: React.FC<ItemCardProps> = ({
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-3 bg-black blur-md rounded-full opacity-70"></div>
               {imageSrc && (
             <Image
-              className='drop-shadow-2xl'
-              src={imageSrc} alt={imageAlt} width={width} height={height} />
+              className={`drop-shadow-2xl ${imageStyling}`}
+              src={imageSrc} alt={imageAlt} width={width} height={height}  />
               )}
           </div>
       {title && <h3 className='font-bold text-lg pt-9 pb-[15px] tracking-[1.29px]'>{title}</h3>}

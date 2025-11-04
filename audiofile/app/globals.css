@@ -29,11 +29,15 @@ nav{
   font-weight: bold;
 }
 
+.nav-links li:hover{
+  color: var(--main-orange);
+}
+
 .whole{
-  background: url('https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910244/HNG/Bitmap_kgbjfr.svg');
+  background: url('https://res.cloudinary.com/dvjx9x8l9/image/upload/v1762206175/HNG/Bitmap_kgbjfr.png');
   background-repeat: no-repeat;
-  background-position: right;
-  background-color: #131313;
+  background-position: top right;
+  background-color: #121212;
   background-size: 44.3rem;
     
 }
@@ -117,3 +121,39 @@ nav{
   object-fit: cover;
   border-radius: 8px;
 }
+
+.input-checkout:focus{
+  border: 1px solid var(--main-orange);
+  outline: none;
+}
+
+
+
+@media screen and (width <= 768px){
+  .nav-links{
+    display: none;
+  }
+
+  .hamburger{
+    display: block;
+  }
+  .bring{
+    
+    text-align: center;
+    padding-top: 1rem;
+  }
+  .whole{
+    background-position: center;
+    background-size: 30rem;
+  }
+
+
+}
+
+@media screen and (width <= 640px){
+  .foot-links{
+    flex-direction: column;
+  }
+}
+
+

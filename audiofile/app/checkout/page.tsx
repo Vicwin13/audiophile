@@ -1,28 +1,34 @@
 // app/checkout/page.tsx
 "use client";
 
-import CheckoutForm from "@/app/components/CheckoutForm";
+import CheckoutForm, {CheckoutForHandle} from "@/app/components/CheckoutForm";
+import { useRef, useState } from "react";
+
 import OrderSummary from "@/app/components/OrderSummary";
 import { api } from "@/convex/_generated/api";
+import { toast } from "sonner";
 import { useCart } from "@/app/context/CartContext";
 import { useQuery } from "convex/react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function CheckoutPage() {
+  const formRef = useRef<CheckoutForHandle>(null);
   const { cartItems, clearCart } = useCart();
   const [isProcessing, setIsProcessing] = useState(false);
   
-  // Fetch store settings (VAT, shipping) from Convex
-  const settings = useQuery(api.setting.getSettings);
   
-  // If you don't have a settings table yet, use defaults temporarily
-  const vatRate = settings?.vatRate || 20; // 20% default
-  const shippingFee = settings?.shippingFee || 50; // $50 default
+  const settings = useQuery(api.setting.getSettings);
+  const vatRate = settings?.vatRate || 20; 
+  const shippingFee = settings?.shippingFee || 50;
+  const router = useRouter()
 
   const handleCheckout = async (formData: any) => {
     setIsProcessing(true);
     
     try {
+
+      toast.loading('Processing your Order', {id: 'checkout'})
+
       // Process checkout logic here
       const result = await processCheckout({ 
         ...formData, 
@@ -32,18 +38,32 @@ export default function CheckoutPage() {
         vat: calculateVAT()
       });
       
+
+      toast.success("Order placed successfully! Check your mail for confirmation")
       // Clear cart after successful checkout
       clearCart();
       
       // You can also redirect to a success page or show a success message
       console.log('Order successful:', result.orderId);
+
+      setTimeout(()=> router.push('/'), 2000)
       
     } catch (error) {
+      toast.error('Checkout failed, Please try again')
       console.error('Checkout failed:', error);
     } finally {
       setIsProcessing(false);
     }
   };
+
+   const triggerFormSubmit = () => {
+    if (formRef.current) {
+      formRef.current.submitForm();
+    }
+  };
+
+
+
 
   const calculateSubtotal = () => {
     return cartItems.reduce(
@@ -101,6 +121,8 @@ export default function CheckoutPage() {
             vat={calculateVAT()}
             shipping={shippingFee}
             total={calculateTotal()}
+            isProcessing={isProcessing}
+            onCheckout={triggerFormSubmit}
             />
         </div>
     </div>
@@ -108,9 +130,9 @@ export default function CheckoutPage() {
   );
 }
 
-// ADD THIS FUNCTION AT THE BOTTOM - OUTSIDE THE COMPONENT
+
 async function processCheckout(orderData: any) {
-  const orderId = `ORD-${Date.now()}`; // Generate a simple unique order ID
+  const orderId = `ORD-${Date.now()}`; 
 
   try {
     // 1. Send the confirmation email

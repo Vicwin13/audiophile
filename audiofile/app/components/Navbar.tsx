@@ -9,7 +9,7 @@ const Navbar = () => {
   const {totalItems, setIsCartOpen} = useCart()
 
   return (
-    <nav className=" bg-[#131313] px-39 ">
+    <nav className=" bg-[#131313] px-5 sm:px-10 md:px-39 ">
       <div className="border-b-[#979797] border border-r-0 border-l-0 border-t-0 pb-9 pt-8 flex justify-between items-center">
 
       <div className="cursor-pointer flex items-center justify-center gap-10">

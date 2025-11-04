@@ -3,7 +3,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface CartItem {
     title: string;
@@ -24,7 +24,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         const { email, name, cartItems, total, orderId }: OrderRequestBody = await request.json();
 
         const { data, error }: { data: unknown; error: unknown } = await resend.emails.send({
-            from: 'Acme <notification.vicwin.com>',
+            from: 'Audiophile <onboarding@resend.dev>',
             to: [email],
             subject: `Order Confirmation - #${orderId}`,
             html: `
