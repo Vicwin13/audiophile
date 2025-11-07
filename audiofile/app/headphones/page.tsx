@@ -31,8 +31,8 @@ const Headphones = () => {
                   text1={product.isFeatured ? "NEW PRODUCT" : ""}
                   title={product.title}
                   width={349}
-                  className={index % 2 === 0 ? 'min-[785px]:flex-row-reverse flex-col-reverse gap-5 pb-12 md:gap-20' : ' justify-end pb-12  min-[785px]:flex-row flex-col-reverse gap-5 md:gap-20 '}
-                text1ClassName='text-(--main-orange)'
+                  className={index % 2 === 0 ? 'min-[785px]:flex-row-reverse flex-col-reverse  gap-5 pb-12 md:gap-20' : ' pb-12  min-[785px]:flex-row flex-col-reverse gap-5 md:gap-20' }
+           text1ClassName='text-(--main-orange)'
                 secondClassName='lg:w-[540px]   max-md:text-center w-[70%] max-sm:w-full'
                 subtitleClassName='text-black/60 md:w-[410px] w-full'
                 imgContClassName='bg-(--main-ash) rounded-lg lg:w-[540px] lg:h-[560px] w-fit p-10 flex justify-center items-center'
