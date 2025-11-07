@@ -83,6 +83,10 @@ nav{
   text-decoration: none;
 }
 
+.documentary{
+  gap: 90px;
+}
+
 .hamburger{
   display: none;
 }
@@ -138,8 +142,10 @@ nav{
 
   .hamburger{
     display: block;
+  }    
+  .documentary{
+    gap:50px;
   }
-
 
   
 }
@@ -159,6 +165,8 @@ nav{
 
   .documentary{
     flex-direction: column-reverse;
+    gap: 15px;
+    text-align: center
   }
 
 

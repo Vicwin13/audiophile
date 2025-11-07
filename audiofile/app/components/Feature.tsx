@@ -26,7 +26,7 @@ const Feature = ({features}:{features:FeaturesDoc}) => {
     }
     return (
       <>
-      <div className="py-9 flex max-md:flex-col max-md:gap-5 items-start justify-between">
+      <div className="py-9 md:px-39 sm:px-10 px-2 flex max-md:flex-col max-md:gap-5 items-start justify-between">
 
           <div className="md:w-[635px] w-full">
               <h1 className="font-bold text-[32px] pb-8 tracking-[1.14px] leading-9">FEATURES</h1>

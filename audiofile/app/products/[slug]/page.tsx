@@ -1,14 +1,16 @@
 // app/product/[slug]/page.tsx
 "use client";
 
-import { Toaster, toast } from 'sonner';
 import { notFound, useParams } from "next/navigation";
 
 import Feature from "@/app/components/Feature";
 import GoBack from '@/app/components/Goback';
 import Image from "next/image";
+import { ItemCards } from "@/app/components/ItemCards";
+import { ItemsCards2 } from '@/app/components/Items2';
 import ProductDetailsCard from "@/app/components/ProductDetailsCard";
 import { api } from "@/convex/_generated/api";
+import { toast } from 'sonner';
 import { useCart } from "@/app/context/CartContext";
 import { useQuery } from "convex/react";
 import { useState } from "react";
@@ -104,7 +106,7 @@ export default function ProductPage() {
 
       <Feature features = {features ?? null} />
 
-       <div className="grid-container">
+       <div className="grid-container max-w-[900px] h-[300px] mx-auto">
 
               <Image className="img1" src={`${product?.image1}`} alt={"Image"} width={445} height={200} />  
               <Image className="img2" src={`${product?.image2}`} alt={"Image"} width={445} height={200} />
@@ -112,9 +114,71 @@ export default function ProductPage() {
 
 
       </div>
-      <div>
-        <Toaster/>
-      </div>
+       <section className=' h-auto px-2 sm:pt-10 md:px-39 pt-28 pb-12'>
+
+            <p className='text-center md:text-4xl py-8 sm:text-2xl text-lg uppercase font-bold tracking-[1.14px] leading-2.5 sm:leading-5 md:leading-9'>You may also like</p>
+            <div className=' flex justify-between max-sm:flex-col gap-7.5 items-center h-full'>
+
+            <ItemsCards2
+                title='XX99 MARK I'
+                imageSrc='https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910243/HNG/image-removebg-preview_41_omdbp1.png'
+                imageAlt='image'
+                href='/headphones'
+                width={140}
+                height={193}
+                
+            
+            />
+             <ItemsCards2
+                title='XX59'
+                imageSrc='https://res.cloudinary.com/dvjx9x8l9/image/upload/v1762017113/HNG/image-removebg-preview_48_wr8gph.png'
+                imageAlt='image'
+                href='/headphones'
+                width={164}
+                height={190}
+                
+            
+            />
+             <ItemsCards2
+                title='ZX9 SPEAKER'
+                imageSrc='https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910243/HNG/image-removebg-preview_38_dzeo24.png'
+                imageAlt='image'
+                href='/speakers'
+                width={143}
+                height={172}
+            />
+              </div>
+          </section>
+
+      
+                      <section className=" h-auto pt-28 pb-18">
+
+        <div className="flex justify-between gap-7.5 items-center  h-full">
+
+        <ItemCards
+          imageSrc="https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910243/HNG/image-removebg-preview_41_omdbp1.png"
+          imageAlt="item1"
+          width={108}
+          height={160}
+          title="HEADPHONES"
+        />
+                <ItemCards
+          imageSrc="https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910243/HNG/image-removebg-preview_38_dzeo24.png"
+          imageAlt="item2"
+          width={121.49}
+          height={146}
+          title="SPEAKERS"
+        />
+                <ItemCards
+          imageSrc="https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910243/HNG/Group_5_mfq5tm.png"
+          imageAlt="item3"
+          width={140 }
+          height={161}
+          title="EARPHONES"
+        />
+                </div>
+                
+              </section>
     
 
     </section>

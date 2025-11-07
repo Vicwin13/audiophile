@@ -2,16 +2,16 @@ import Button from './Button';
 import Image from 'next/image';
 import React from 'react'
 
-interface ItemCardProps extends React.ComponentPropsWithoutRef<'div'>{
-    imageSrc?: string;
-    imageAlt?: string;
-    width?: number;
-    height?: number;
-    title?: string;
+interface ItemCardProps extends React.ComponentPropsWithoutRef<'div'> {
+  imageSrc?: string;
+  imageAlt?: string;
+  width?: number;
+  height?: number;
+  title?: string;
   imageStyling?: string;
   href?: string
-
 }
+
 
 export const ItemCards: React.FC<ItemCardProps> = ({
     imageAlt = "",

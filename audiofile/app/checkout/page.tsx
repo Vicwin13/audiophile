@@ -5,6 +5,7 @@ import CheckoutForm, {CheckoutForHandle} from "@/app/components/CheckoutForm";
 import { useRef, useState } from "react";
 
 import CheckoutSuccessModal from "@/app/components/SuccessModal"; // Add this import
+import GoBack from "../components/Goback";
 import OrderSummary from "@/app/components/OrderSummary";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
@@ -28,8 +29,7 @@ export default function CheckoutPage() {
     setIsProcessing(true);
     
     try {
-      toast.loading('Processing your Order', {id: 'checkout'})
-
+    
       // Process checkout logic here
       const result = await processCheckout({ 
         ...formData, 
@@ -51,7 +51,7 @@ export default function CheckoutPage() {
       toast.success("Order placed successfully! Check your mail for confirmation")
       
       // Clear cart after successful checkout
-      clearCart();
+      
       
       // Show success modal instead of redirecting
       setShowSuccessModal(true);
@@ -65,15 +65,12 @@ export default function CheckoutPage() {
   };
 
   const handleCloseModal = () => {
+
+    clearCart();
     setShowSuccessModal(false);
     router.push('/'); // Redirect to home when modal is closed
   };
 
-  const triggerFormSubmit = () => {
-    if (formRef.current) {
-      formRef.current.submitForm();
-    }
-  };
 
   const calculateSubtotal = () => {
     return cartItems.reduce(
@@ -106,7 +103,12 @@ export default function CheckoutPage() {
 
   return (
     <>
+      
+
       <section className="px-39 py-16 bg-(--another-ash)">
+
+        <GoBack/>
+
         <div className="flex justify-between gap-18">    
           <div className="bg-white w-full rounded-lg p-12 ">
             <h1 className="text-2xl font-bold mb-8">CHECKOUT</h1>
@@ -138,7 +140,6 @@ export default function CheckoutPage() {
           isOpen={showSuccessModal}
           onClose={handleCloseModal}
           orderId={orderDetails.orderId}
-          cartItems={orderDetails.cartItems}
           total={orderDetails.total}
           shipping={orderDetails.shipping}
           vat={orderDetails.vat}

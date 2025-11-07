@@ -7,9 +7,9 @@ import { ItemCards } from "./ItemCards"
 
 const Hero = () => {
   return (
-    <section className="">
+    <section className=" ">
 
-      <section className="bg-black h-screen px-10 md:px-39 whole">
+      <section className="bg-black h-screen px-2 sm:px-10 md:px-39 whole">
           
           <section className="md:w-[398px] max-md:mx-auto  pt-32">
               
@@ -27,7 +27,8 @@ const Hero = () => {
             subtitle="Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast."
             BtnProps={{
               variant: 'primary',
-              size: "sm"
+              size: "sm",
+              href:"/headphones"
             }}
           />
           
@@ -43,21 +44,24 @@ const Hero = () => {
           imageAlt="item1"
           width={108}
           height={160}
-          title="HEADPHONES"
+            title="HEADPHONES"
+            href="/headphones"
         />
                 <ItemCards
           imageSrc="https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910243/HNG/image-removebg-preview_38_dzeo24.png"
           imageAlt="item2"
           width={121.49}
           height={146}
-          title="SPEAKERS"
+            title="SPEAKERS"
+            href="/speakers"
         />
                 <ItemCards
           imageSrc="https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910243/HNG/Group_5_mfq5tm.png"
           imageAlt="item3"
           width={140 }
           height={161}
-          title="EARPHONES"
+            title="EARPHONES"
+            href="/earphones"
         />
           </div>
 
@@ -76,11 +80,12 @@ const Hero = () => {
             subtitle="Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound."
             buttonText="SEE PRODUCT"
             titleClassName="max-md:text-center max-sm:text-[30px] my-0 text-white max-md:w-1/2 max-md:mx-auto"
-            imageStyling="w-70 h-70 max-sm:w-50 max-sm:h-50"
+            imageStyling="w-100 h-100 max-sm:w-50 max-sm:h-50"
             subtitleClassName="max-md:text-center text-white max-md:w-1/2 max-md:mx-auto"
             BtnProps={{
               variant: 'filled',
-              size:"sm"
+              size: "sm",
+              href:"/speakers"
               
             }}
           />
@@ -92,7 +97,7 @@ const Hero = () => {
       <section className="sect4  ">
           <div className="h-full text-center flex flex-col pl-24 max-md:pl-12 max-sm:pl-3 max-md:text-left justify-center items-start  w-fit ">
             <h1 className="text-[28px] font-bold tracking-[2px] mb-8 max-sm:text-lg">ZX7 SPEAKER</h1>
-            <Button variant="secondary" size="sm">
+            <Button variant="secondary" size="sm" href="/speakers">
               SEE PRODUCT
             </Button>
             </div>
@@ -107,15 +112,15 @@ const Hero = () => {
         <div className="bg-[#f1f1f1] rounded-lg h-80 w-[540px] max-sm:w-full">
           <div className="h-full text-center flex flex-col pl-24 max-md:pl-12 max-sm:pl-3 max-md:text-left justify-center items-start  w-fit ">
             <h1 className="text-[28px] font-bold tracking-[2px] mb-8 max-sm:text-lg">YX1 EARPHONES</h1>
-            <Button variant="secondary" size="sm">
+            <Button variant="secondary" size="sm" href="/speakers">
               SEE PRODUCT
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="px-10 max-sm:px-2.5 md:px-39 pb-9">
-        <div className="flex justify-between documentary items-center">
+      <section className="px-10 max-sm:px-2.5 md:px-39  pb-9">
+        <div className="flex justify-between documentary  items-center">
           <div >
             <h1 className="font-bold bring tracking-[1.43px] max-sm:tracking-normal text-[40px] max-sm:text-2xl max-sm:leading-7  leading-11 uppercase">Bringing you the <span className="text-(--main-orange)">best</span> audio gear</h1>
             <p className="md:w-[445px] max-sm:w-full max-sm:px-2  max-md:px-8 max-md:text-center pt-8 font-medium text-[15px] leading-[25px] max-sm:leading-[18px] text-black/50">

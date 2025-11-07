@@ -10,7 +10,7 @@ const Speakers = () => {
 
   const products = useQuery(api.products.getProductsByCategory, { category: "speakers" })
   
-  if(!products) return <div className='py-6 px-39 h-full'> Loading...</div>
+  if(!products) return <div className='py-6 px-39 h-screen'>Loading ...</div>
   
 
 
@@ -31,7 +31,7 @@ const Speakers = () => {
               text1={product.isFeatured ? "NEW PRODUCT" : ""}
               title={product.title}
                 width={290}
-                className={index % 2 === 0 ? 'flex-row-reverse md:gap-32' : 'md:gap-32'}
+                className={index % 2 === 0 ? 'min-[785px]:flex-row-reverse flex-col-reverse  gap-5 pb-12 md:gap-20' : ' pb-12  min-[785px]:flex-row flex-col-reverse gap-5 md:gap-20 '}
                 text1ClassName='text-(--main-orange)'
                 secondClassName='w-[540px]'
                 subtitleClassName='text-black/60 w-[410px]'
@@ -81,15 +81,16 @@ const Speakers = () => {
                 
               </section>
               
-                  <section className=" pt-10 mt-10 pb-12">
-        <div className="flex justify-between items-center">
+      
+      <section className="px-10 max-sm:px-2.5 md:px-39 pb-9">
+        <div className="flex justify-between documentary items-center">
           <div >
-            <h1 className="font-bold tracking-[1.43px] text-[40px] leading-11 uppercase">Bringing you the <span className="text-(--main-orange)">best</span> audio gear</h1>
-            <p className="md:w-[445px] pt-8 font-medium text-[15px] leading-[25px] text-black/50">
+            <h1 className="font-bold bring tracking-[1.43px] max-sm:tracking-normal text-[40px] max-sm:text-2xl max-sm:leading-7  leading-11 uppercase">Bringing you the <span className="text-(--main-orange)">best</span> audio gear</h1>
+            <p className="md:w-[445px] max-sm:w-full max-sm:px-2  max-md:px-8 max-md:text-center pt-8 font-medium text-[15px] leading-[25px] max-sm:leading-[18px] text-black/50">
               Located at the heart of New York City, Audiophile is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Audiophile the best place to buy your portable audio equipment.
             </p>
           </div>
-          <Image src={"https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910243/HNG/Bitmap_2_tqykdw.png"} alt={"image"} width={540} height={560} />
+          <Image src={"https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910243/HNG/Bitmap_2_tqykdw.png"} alt={"image"} width={540} height={588} />
         </div>
       </section>
           

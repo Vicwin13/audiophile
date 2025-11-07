@@ -92,9 +92,7 @@ const CheckoutForm = forwardRef<CheckoutForHandle, CheckoutFormProps>(({ onSubmi
  }));
     
     const submitFormProgrammatically = () => {
-  console.log('🎯 [CheckoutForm] submitFormProgrammatically called');
-  console.log('📝 [CheckoutForm] Current formData:', formData);
-  
+ 
   if (validateForm()) {
     console.log('✅ [CheckoutForm] Form is valid, calling onSubmit');
     onSubmit(formData);

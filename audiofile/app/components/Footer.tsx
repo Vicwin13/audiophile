@@ -8,9 +8,9 @@ const Footer = () => {
           <div className='px-10 max-sm:px-5 md:px-39 pt-19 pb-12 '>
               <div className='relative'>
            
-          <div className='flex  max-md:justify-start logs md:justify-between items-start max-sm:items-center   md:items-center md:flex-row flex-col pb-9 max-md:pb-5'>
+          <div className='flex  max-md:justify-start  md:justify-between items-start max-sm:items-center   md:items-center md:flex-row flex-col pb-9 max-md:pb-5'>
               <Image src={'https://res.cloudinary.com/dvjx9x8l9/image/upload/v1761910243/HNG/audiophile_idkhnl.svg'} alt={'Logo'}
-              width={143} height={25} className='pb-8'
+              width={143} height={25} className='max-md:pb-8'
                   />
                   
                   <div className='foot-links flex items-center gap-[35px] pt-2.5 max-md:gap-3.5'>
